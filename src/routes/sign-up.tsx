@@ -13,20 +13,20 @@ function RouteComponent() {
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
 			{/* Navigation */}
-			<nav className="border-b border-border/40 backdrop-blur-sm bg-background/80">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="flex justify-between items-center h-16">
+			<nav className="border-b border-border/40 bg-background/80 backdrop-blur-sm">
+				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+					<div className="flex h-16 items-center justify-between">
 						<div className="flex items-center space-x-2">
-							<div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-								<Zap className="w-5 h-5 text-white" />
+							<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary">
+								<Zap className="h-5 w-5 text-white" />
 							</div>
-							<span className="text-xl font-bold font-heading">
+							<span className="font-heading text-xl font-bold">
 								GraphBit Cloud
 							</span>
 						</div>
 						<Button asChild variant="ghost">
 							<Link className="flex items-center space-x-2" to="/">
-								<ArrowLeft className="w-4 h-4" />
+								<ArrowLeft className="h-4 w-4" />
 								<span>Back to Home</span>
 							</Link>
 						</Button>
@@ -36,12 +36,12 @@ function RouteComponent() {
 
 			<div className="flex min-h-[calc(100vh-4rem)]">
 				{/* Left side - Benefits */}
-				<div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary/10 to-secondary/10 p-12 items-center">
+				<div className="hidden items-center bg-gradient-to-br from-primary/10 to-secondary/10 p-12 lg:flex lg:w-1/2">
 					<div className="max-w-md">
-						<h2 className="text-3xl font-bold font-heading mb-6">
+						<h2 className="font-heading mb-6 text-3xl font-bold">
 							Start building the future
 						</h2>
-						<p className="text-muted-foreground mb-8 text-lg">
+						<p className="mb-8 text-lg text-muted-foreground">
 							Join thousands of developers who trust GraphBit Cloud for their
 							applications.
 						</p>
@@ -67,11 +67,11 @@ function RouteComponent() {
 								},
 							].map((feature, index) => (
 								<div key={index} className="flex items-start space-x-3">
-									<div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-										<feature.icon className="w-5 h-5 text-primary" />
+									<div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20">
+										<feature.icon className="h-5 w-5 text-primary" />
 									</div>
 									<div>
-										<h3 className="font-semibold mb-1">{feature.title}</h3>
+										<h3 className="mb-1 font-semibold">{feature.title}</h3>
 										<p className="text-sm text-muted-foreground">
 											{feature.description}
 										</p>
@@ -80,7 +80,7 @@ function RouteComponent() {
 							))}
 						</div>
 
-						<div className="mt-8 p-4 bg-background/50 rounded-lg border border-border/50">
+						<div className="mt-8 rounded-lg border border-border/50 bg-background/50 p-4">
 							<p className="text-sm text-muted-foreground">
 								<span className="font-semibold text-foreground">
 									Free to start:
@@ -93,10 +93,10 @@ function RouteComponent() {
 				</div>
 
 				{/* Right side - Sign up form */}
-				<div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12">
+				<div className="flex flex-1 items-center justify-center p-4 sm:p-6 lg:p-12">
 					<div className="w-full max-w-md">
-						<div className="text-center mb-8">
-							<h1 className="text-3xl font-bold font-heading text-foreground mb-2">
+						<div className="mb-8 text-center">
+							<h1 className="font-heading mb-2 text-3xl font-bold text-foreground">
 								Join GraphBit Cloud
 							</h1>
 							<p className="text-muted-foreground">
@@ -105,7 +105,7 @@ function RouteComponent() {
 							</p>
 						</div>
 
-						<Card className="border-border/50 shadow-xl bg-background/50 backdrop-blur-sm">
+						<Card className="border-border/50 bg-background/50 shadow-xl backdrop-blur-sm">
 							<CardContent className="p-8">
 								<SignUp
 									redirectUrl="/"
@@ -147,18 +147,18 @@ function RouteComponent() {
 							</CardContent>
 						</Card>
 
-						<div className="text-center mt-6">
+						<div className="mt-6 text-center">
 							<p className="text-sm text-muted-foreground">
 								By signing up, you agree to our{' '}
 								<a
-									className="text-primary hover:text-primary/80 underline transition-colors"
+									className="text-primary underline transition-colors hover:text-primary/80"
 									href="/terms"
 								>
 									Terms of Service
 								</a>{' '}
 								and{' '}
 								<a
-									className="text-primary hover:text-primary/80 underline transition-colors"
+									className="text-primary underline transition-colors hover:text-primary/80"
 									href="/privacy"
 								>
 									Privacy Policy
@@ -166,11 +166,11 @@ function RouteComponent() {
 							</p>
 						</div>
 
-						<div className="text-center mt-4">
+						<div className="mt-4 text-center">
 							<p className="text-sm text-muted-foreground">
 								Already have an account?{' '}
 								<Link
-									className="text-primary hover:text-primary/80 font-medium underline transition-colors"
+									className="font-medium text-primary underline transition-colors hover:text-primary/80"
 									to="/sign-in"
 								>
 									Sign in here

@@ -79,12 +79,14 @@ We use **Orval** to generate TypeScript hooks and types directly from your OpenA
 ### Installation
 
 1.  **Clone the repository:**
+
     ```bash
     git clone <your-repo-url>
     cd <your-project-name>
     ```
 
 2.  **Install dependencies:**
+
     ```bash
     pnpm install
     ```
@@ -105,16 +107,16 @@ The app will be available at `http://localhost:3000`.
 
 ## Available Scripts
 
-| Script | Description |
-| --- | --- |
-| `pnpm run dev` | Start the development server |
-| `pnpm run build` | Build for production |
-| `pnpm run test` | Run tests with Vitest |
-| `pnpm run lint` | Lint code with ESLint |
-| `pnpm run format` | Format code with Prettier |
-| `pnpm run generate` | Generate API client from OpenAPI spec |
+| Script                     | Description                            |
+| -------------------------- | -------------------------------------- |
+| `pnpm run dev`             | Start the development server           |
+| `pnpm run build`           | Build for production                   |
+| `pnpm run test`            | Run tests with Vitest                  |
+| `pnpm run lint`            | Lint code with ESLint                  |
+| `pnpm run format`          | Format code with Prettier              |
+| `pnpm run generate`        | Generate API client from OpenAPI spec  |
 | `pnpm run lucide:generate` | Optimize and install used Lucide icons |
-| `pnpm run commit` | Commit changes using Commitizen |
+| `pnpm run commit`          | Commit changes using Commitizen        |
 
 ## Workflows
 

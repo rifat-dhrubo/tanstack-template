@@ -150,7 +150,7 @@ function TableDemo() {
 		<div className="min-h-screen bg-gray-900 p-6">
 			<div>
 				<DebouncedInput
-					className="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+					className="w-full rounded-lg border border-gray-700 bg-gray-800 p-3 text-white outline-none focus:border-transparent focus:ring-2 focus:ring-blue-500"
 					placeholder="Search all columns..."
 					value={globalFilter ?? ''}
 					onChange={(value) => setGlobalFilter(String(value))}
@@ -206,7 +206,7 @@ function TableDemo() {
 							return (
 								<tr
 									key={row.id}
-									className="hover:bg-gray-800 transition-colors"
+									className="transition-colors hover:bg-gray-800"
 								>
 									{row.getVisibleCells().map((cell) => {
 										return (
@@ -227,28 +227,28 @@ function TableDemo() {
 			<div className="h-4" />
 			<div className="flex flex-wrap items-center gap-2 text-gray-200">
 				<button
-					className="px-3 py-1 bg-gray-800 rounded-md hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+					className="rounded-md bg-gray-800 px-3 py-1 hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
 					disabled={!table.getCanPreviousPage()}
 					onClick={() => table.setPageIndex(0)}
 				>
 					{'<<'}
 				</button>
 				<button
-					className="px-3 py-1 bg-gray-800 rounded-md hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+					className="rounded-md bg-gray-800 px-3 py-1 hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
 					disabled={!table.getCanPreviousPage()}
 					onClick={() => table.previousPage()}
 				>
 					{'<'}
 				</button>
 				<button
-					className="px-3 py-1 bg-gray-800 rounded-md hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+					className="rounded-md bg-gray-800 px-3 py-1 hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
 					disabled={!table.getCanNextPage()}
 					onClick={() => table.nextPage()}
 				>
 					{'>'}
 				</button>
 				<button
-					className="px-3 py-1 bg-gray-800 rounded-md hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+					className="rounded-md bg-gray-800 px-3 py-1 hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
 					disabled={!table.getCanNextPage()}
 					onClick={() => table.setPageIndex(table.getPageCount() - 1)}
 				>
@@ -264,7 +264,7 @@ function TableDemo() {
 				<span className="flex items-center gap-1">
 					| Go to page:
 					<input
-						className="w-16 px-2 py-1 bg-gray-800 rounded-md border border-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+						className="w-16 rounded-md border border-gray-700 bg-gray-800 px-2 py-1 outline-none focus:border-transparent focus:ring-2 focus:ring-blue-500"
 						defaultValue={table.getState().pagination.pageIndex + 1}
 						type="number"
 						onChange={(e) => {
@@ -274,7 +274,7 @@ function TableDemo() {
 					/>
 				</span>
 				<select
-					className="px-2 py-1 bg-gray-800 rounded-md border border-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+					className="rounded-md border border-gray-700 bg-gray-800 px-2 py-1 outline-none focus:border-transparent focus:ring-2 focus:ring-blue-500"
 					value={table.getState().pagination.pageSize}
 					onChange={(e) => {
 						table.setPageSize(Number(e.target.value));
@@ -292,19 +292,19 @@ function TableDemo() {
 			</div>
 			<div className="mt-4 flex gap-2">
 				<button
-					className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+					className="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
 					onClick={() => rerender()}
 				>
 					Force Rerender
 				</button>
 				<button
-					className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+					className="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
 					onClick={() => refreshData()}
 				>
 					Refresh Data
 				</button>
 			</div>
-			<pre className="mt-4 p-4 bg-gray-800 rounded-lg text-gray-300 overflow-auto">
+			<pre className="mt-4 overflow-auto rounded-lg bg-gray-800 p-4 text-gray-300">
 				{JSON.stringify(
 					{
 						columnFilters: table.getState().columnFilters,
@@ -323,7 +323,7 @@ function Filter({ column }: { column: Column<any, unknown> }) {
 
 	return (
 		<DebouncedInput
-			className="w-full px-2 py-1 bg-gray-700 text-white rounded-md border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+			className="w-full rounded-md border border-gray-600 bg-gray-700 px-2 py-1 text-white outline-none focus:border-transparent focus:ring-2 focus:ring-blue-500"
 			placeholder={`Search...`}
 			type="text"
 			value={(columnFilterValue ?? '') as string}
