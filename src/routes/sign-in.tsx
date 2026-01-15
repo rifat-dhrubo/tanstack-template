@@ -1,4 +1,3 @@
-import { SignIn } from '@clerk/clerk-react';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { ArrowLeft, Rocket, Shield, Users, Zap } from 'lucide-react';
 
@@ -94,42 +93,7 @@ function RouteComponent() {
 						</div>
 
 						<Card className="border-border/50 shadow-lg">
-							<CardContent className="p-0">
-								<SignIn
-									redirectUrl="/"
-									signUpUrl="/sign-up"
-									appearance={{
-										elements: {
-											rootBox: 'w-full',
-											card: 'bg-transparent border-0 shadow-none',
-											headerTitle: 'hidden',
-											headerSubtitle: 'hidden',
-											socialButtonsBlockButton:
-												'bg-muted hover:bg-muted/80 border-border text-foreground',
-											socialButtonsBlockButtonText: 'text-foreground',
-											dividerLine: 'bg-border',
-											dividerText: 'text-muted-foreground',
-											formFieldInput:
-												'bg-background border-border text-foreground focus:border-primary',
-											formFieldLabel: 'text-foreground',
-											footerActionLink: 'text-primary hover:text-primary/80',
-											identityPreviewText: 'text-foreground',
-											identityPreviewEditButton:
-												'text-primary hover:text-primary/80',
-											formButtonPrimary:
-												'bg-primary hover:bg-primary/90 text-primary-foreground',
-											formFieldErrorText: 'text-destructive',
-											alertClerkError: 'text-destructive',
-											formFieldSuccessText: 'text-green-600',
-											footerActionText: 'text-muted-foreground',
-										},
-										layout: {
-											socialButtonsPlacement: 'top',
-											socialButtonsVariant: 'blockButton',
-										},
-									}}
-								/>
-							</CardContent>
+							<CardContent className="p-0">sign in</CardContent>
 						</Card>
 
 						<div className="mt-6 text-center">
