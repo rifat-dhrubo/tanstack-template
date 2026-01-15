@@ -18,9 +18,6 @@ import {
 
 export const Route = createFileRoute('/')({
 	component: App,
-	beforeLoad(ctx) {
-		console.log(ctx.context);
-	},
 });
 
 function App() {
