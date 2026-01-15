@@ -1,8 +1,6 @@
 import { Link } from '@tanstack/react-router';
-import { Globe, Home, Menu, Network, Table, X } from 'lucide-react';
+import { Home, Menu, Network, X } from 'lucide-react';
 import React from 'react';
-
-import { HeaderUser } from '../integrations/clerk/header-user.tsx';
 
 export function Header() {
 	const [isOpen, setIsOpen] = React.useState(false);
@@ -62,32 +60,6 @@ export function Header() {
 
 					<Link
 						className="mb-2 flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-gray-800"
-						to="/demo/clerk"
-						activeProps={{
-							className:
-								'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-						}}
-						onClick={() => setIsOpen(false)}
-					>
-						<Globe size={20} />
-						<span className="font-medium">Clerk</span>
-					</Link>
-
-					<Link
-						className="mb-2 flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-gray-800"
-						to="/demo/table"
-						activeProps={{
-							className:
-								'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-						}}
-						onClick={() => setIsOpen(false)}
-					>
-						<Table size={20} />
-						<span className="font-medium">TanStack Table</span>
-					</Link>
-
-					<Link
-						className="mb-2 flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-gray-800"
 						to="/demo/tanstack-query"
 						activeProps={{
 							className:
@@ -101,10 +73,6 @@ export function Header() {
 
 					{/* Demo Links End */}
 				</nav>
-
-				<div className="flex flex-col gap-2 border-t border-gray-700 bg-gray-800 p-4">
-					<HeaderUser />
-				</div>
 			</aside>
 		</>
 	);

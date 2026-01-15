@@ -1,4 +1,3 @@
-import { SignUp } from '@clerk/clerk-react';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { ArrowLeft, Globe, Package, TrendingUp, Zap } from 'lucide-react';
 
@@ -106,45 +105,7 @@ function RouteComponent() {
 						</div>
 
 						<Card className="border-border/50 bg-background/50 shadow-xl backdrop-blur-sm">
-							<CardContent className="p-8">
-								<SignUp
-									redirectUrl="/"
-									signInUrl="/sign-in"
-									appearance={{
-										elements: {
-											rootBox: 'w-full',
-											card: 'bg-transparent border-0 shadow-none',
-											headerTitle: 'hidden',
-											headerSubtitle: 'hidden',
-											socialButtonsBlockButton:
-												'bg-muted hover:bg-muted/80 border-border text-foreground transition-colors duration-200',
-											socialButtonsBlockButtonText: 'text-foreground',
-											dividerLine: 'bg-border',
-											dividerText: 'text-muted-foreground',
-											formFieldInput:
-												'bg-background border-border text-foreground focus:border-primary transition-colors duration-200',
-											formFieldLabel: 'text-foreground font-medium',
-											footerActionLink:
-												'text-primary hover:text-primary/80 transition-colors',
-											identityPreviewText: 'text-foreground',
-											identityPreviewEditButton:
-												'text-primary hover:text-primary/80 transition-colors',
-											formButtonPrimary:
-												'bg-primary hover:bg-primary/90 text-primary-foreground transition-colors duration-200',
-											formFieldErrorText: 'text-destructive',
-											alertClerkError:
-												'text-destructive bg-destructive/10 border border-destructive/20 rounded-lg p-3',
-											formFieldSuccessText: 'text-green-600',
-											footerActionText:
-												'text-muted-foreground hover:text-foreground transition-colors',
-										},
-										layout: {
-											socialButtonsPlacement: 'top',
-											socialButtonsVariant: 'blockButton',
-										},
-									}}
-								/>
-							</CardContent>
+							<CardContent className="p-8">Sign Up</CardContent>
 						</Card>
 
 						<div className="mt-6 text-center">
