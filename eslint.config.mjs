@@ -1,5 +1,4 @@
 // @ts-check
-import { tanstackConfig } from '@tanstack/eslint-config';
 import tseslint from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import eslint from '@eslint/js';
@@ -11,6 +10,7 @@ import { globalIgnores } from 'eslint/config';
 import pluginRouter from '@tanstack/eslint-plugin-router';
 import importPlugin from 'eslint-plugin-import-x';
 import sortDestructureKeys from 'eslint-plugin-sort-destructure-keys';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const tsconfigPath = resolve(__dirname, './tsconfig.json');
@@ -23,8 +23,7 @@ export default tseslint.config(
 	tseslint.configs.stylisticTypeChecked,
 	reactHooks.configs.flat.recommended,
 	jsxA11y.flatConfigs.recommended,
-	tanstackConfig,
-	globalIgnores(['./dist/', './node_modules/', './public/']),
+	globalIgnores(['./dist/', './node_modules/', './public/', './.output/']),
 
 	{
 		files: ['**/*.js', '**/*.mjs', 'dist/**/*.js', 'dist/**'],
@@ -53,7 +52,6 @@ export default tseslint.config(
 			react: { version: 'detect' },
 		},
 		rules: {
-			// Enforce project UI/UX conventions
 			'no-restricted-imports': [
 				'error',
 				{
@@ -98,7 +96,6 @@ export default tseslint.config(
 			],
 			'import/no-cycle': 'off',
 
-			// Style rules (not handled by Prettier)
 			'import/order': [
 				'warn',
 				{
@@ -118,20 +115,7 @@ export default tseslint.config(
 					},
 				},
 			],
-			'react/jsx-sort-props': [
-				'warn',
-				{
-					callbacksLast: true,
-					shorthandFirst: true,
-					multiline: 'last',
-					noSortAlphabetically: false,
-					reservedFirst: true,
-				},
-			],
-			'sort-destructure-keys/sort-destructure-keys': [
-				'warn',
-				{ caseSensitive: false },
-			],
+
 			'react/prop-types': 'off',
 		},
 	},
@@ -145,4 +129,6 @@ export default tseslint.config(
 		],
 		rules: { 'import/no-default-export': 'off' },
 	},
+
+	eslintConfigPrettier,
 );

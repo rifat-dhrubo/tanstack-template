@@ -47,7 +47,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				<ThemeProvider>
+				<ThemeProvider forcedTheme="light">
 					{children}
 					<TanStackDevtools
 						config={{
