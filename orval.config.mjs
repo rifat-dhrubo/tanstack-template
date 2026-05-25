@@ -2,7 +2,7 @@ import { defineConfig } from 'orval';
 
 export default defineConfig({
 	graphbit: {
-		input: 'https://dev-platform-api.graphbit.ai/openapi.json',
+		input: 'https://petstore.swagger.io/v2/swagger.json',
 		output: {
 			client: 'react-query',
 			mode: 'single',
