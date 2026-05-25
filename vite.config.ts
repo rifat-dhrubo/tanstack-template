@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import { resolve } from 'node:path';
 
+import { paraglide } from '@inlang/paraglide-js-adapter-vite';
 import tailwindcss from '@tailwindcss/vite';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import viteReact from '@vitejs/plugin-react';
@@ -126,6 +127,10 @@ function replaceIconReferencesPlugin(hashedFile: string): Plugin {
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
+		paraglide({
+			project: './project.inlang',
+			outdir: './src/paraglide',
+		}),
 		tanstackRouter({ autoCodeSplitting: true, target: 'react' }),
 		svgr(),
 		viteReact({
