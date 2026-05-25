@@ -74,6 +74,7 @@ function getCachedIconsHash(): string {
 
 const iconsHash = getCachedIconsHash();
 const hashedIconFileName = `icon.${iconsHash}.svg`;
+const isVitest = process.env.VITEST === 'true';
 
 /**
  * Ensures both static and hashed versions of the icon sprite exist
@@ -129,22 +130,23 @@ function replaceIconReferencesPlugin(hashedFile: string): Plugin {
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
-		devtools({
-			editor: {
-				name: 'code',
-				open: async (filePath, lineNumber, columnNumber) => {
-					const { exec } = await import('node:child_process');
+		!isVitest &&
+			devtools({
+				editor: {
+					name: 'code',
+					open: async (filePath, lineNumber, columnNumber) => {
+						const { exec } = await import('node:child_process');
 
-					const location = lineNumber
-						? `${path.normalize(filePath)}:${lineNumber}${columnNumber ? `:${columnNumber}` : ''}`
-						: path.normalize(filePath);
+						const location = lineNumber
+							? `${path.normalize(filePath)}:${lineNumber}${columnNumber ? `:${columnNumber}` : ''}`
+							: path.normalize(filePath);
 
-					exec(`code --goto "${location}"`);
+						exec(`code --goto "${location}"`);
+					},
 				},
-			},
-		}),
-		tanstackStart(),
-		nitro(),
+			}),
+		!isVitest && tanstackStart(),
+		!isVitest && nitro(),
 		svgr(),
 		viteReact(),
 		babel({
