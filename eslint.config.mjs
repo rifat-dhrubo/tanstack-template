@@ -23,7 +23,7 @@ export default tseslint.config(
 	tseslint.configs.stylisticTypeChecked,
 	reactHooks.configs.flat.recommended,
 	jsxA11y.flatConfigs.recommended,
-	globalIgnores(['./dist/', './node_modules/', './public/', './.output/']),
+	globalIgnores(['./dist/', './node_modules/', './public/', './.output/', './src/paraglide/']),
 
 	{
 		files: ['**/*.js', '**/*.mjs', 'dist/**/*.js', 'dist/**'],
