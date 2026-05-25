@@ -1,33 +1,23 @@
 import { create } from 'zustand';
 
 import {
-	availableLanguageTags,
-	languageTag,
-	onSetLanguageTag,
-	setLanguageTag,
+	getLocale,
+	locales,
+	setLocale as setParaglideLocale,
 } from '@/paraglide/runtime';
 
-type AvailableLanguageTag = (typeof availableLanguageTags)[number];
+type AvailableLocale = (typeof locales)[number];
 
 interface LocaleState {
-	locale: AvailableLanguageTag;
-	setLocale: (locale: AvailableLanguageTag) => void;
+	locale: AvailableLocale;
+	setLocale: (locale: AvailableLocale) => void;
 }
 
 export const useLocale = create<LocaleState>((set, get) => ({
-	locale: languageTag(),
-	setLocale: (locale: AvailableLanguageTag) => {
+	locale: getLocale(),
+	setLocale: (locale: AvailableLocale) => {
 		if (get().locale === locale) return;
 		set({ locale });
-		setLanguageTag(locale);
+		void setParaglideLocale(locale);
 	},
 }));
-
-// Register once globally to keep the store in sync with paraglide runtime.
-// This covers server-side locale resolution (setLanguageTag via SSR middleware)
-// and any direct setLanguageTag calls outside the store.
-onSetLanguageTag((tag) => {
-	if (useLocale.getState().locale !== tag) {
-		useLocale.setState({ locale: tag });
-	}
-});

@@ -19,8 +19,8 @@ vi.mock('@/integrations/i18n/locale-store', () => ({
 
 vi.mock('@/paraglide/messages', () => ({
 	$locale: vi.fn(
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		(
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			_params: Record<string, never> = {},
 			options: { languageTag?: string } = {},
 		) => {

@@ -10,9 +10,9 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useLocale } from '@/integrations/i18n/locale-store';
 import { $locale } from '@/paraglide/messages';
-import { availableLanguageTags } from '@/paraglide/runtime';
+import { locales } from '@/paraglide/runtime';
 
-type AvailableLanguageTag = (typeof availableLanguageTags)[number];
+type AvailableLocale = (typeof locales)[number];
 
 export function LocaleSwitcher() {
 	const locale = useLocale((state) => state.locale);
@@ -29,15 +29,15 @@ export function LocaleSwitcher() {
 			<DropdownMenuContent align="end">
 				<DropdownMenuRadioGroup
 					value={locale}
-					onValueChange={(value) => setLocale(value as AvailableLanguageTag)}
+					onValueChange={(value) => setLocale(value as AvailableLocale)}
 				>
-					{availableLanguageTags.map((tag) => (
+					{locales.map((tag) => (
 						<DropdownMenuRadioItem
 							key={tag}
 							value={tag}
 							disabled={tag === locale}
 						>
-							{$locale({}, { languageTag: tag })}
+							{$locale({}, { locale: tag })}
 						</DropdownMenuRadioItem>
 					))}
 				</DropdownMenuRadioGroup>
