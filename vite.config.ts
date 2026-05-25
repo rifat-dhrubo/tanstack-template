@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path, { resolve } from 'node:path';
 
+import { paraglide } from '@inlang/paraglide-js-adapter-vite';
 import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 import { devtools } from '@tanstack/devtools-vite';
@@ -130,6 +131,10 @@ function replaceIconReferencesPlugin(hashedFile: string): Plugin {
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
+		paraglide({
+			project: './project.inlang',
+			outdir: './src/paraglide',
+		}),
 		!isVitest &&
 			devtools({
 				editor: {

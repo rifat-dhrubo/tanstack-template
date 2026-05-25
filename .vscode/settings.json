@@ -9,7 +9,7 @@
 		"**/routeTree.gen.ts": true
 	},
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"cSpell.words": ["graphbit"],
+	"cSpell.words": [],
 	"files.associations": {
 		"*.css": "tailwindcss"
 	},
