@@ -4,3 +4,4 @@ yarn.lock
 routeTree.gen.ts
 CHANGELOG.md
 CONTRIBUTING.md
+src/routeTree.gen.ts
