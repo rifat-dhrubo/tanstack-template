@@ -103,7 +103,7 @@ We use **Orval** to generate TypeScript hooks and types directly from your OpenA
 pnpm run dev
 ```
 
-The app will be available at `http://localhost:3000`.
+The app will be available at `http://localhost:3210`.
 
 ## Available Scripts
 
