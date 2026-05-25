@@ -130,5 +130,23 @@ export default tseslint.config(
 		rules: { 'import/no-default-export': 'off' },
 	},
 
+	{
+		files: ['**/*.test.*', '**/__tests__/**'],
+		extends: [tseslint.configs.disableTypeChecked],
+		languageOptions: {
+			globals: {
+				describe: 'readonly',
+				it: 'readonly',
+				test: 'readonly',
+				expect: 'readonly',
+				beforeEach: 'readonly',
+				afterEach: 'readonly',
+				beforeAll: 'readonly',
+				afterAll: 'readonly',
+				vi: 'readonly',
+			},
+		},
+	},
+
 	eslintConfigPrettier,
 );
