@@ -47,19 +47,13 @@ jobs:
 
       - name: Create .env file from GitHub secrets
         run: |
-          echo "VITE_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}" >> .env
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
-          echo "VITE_STRIPE_PUBLISHABLE_KEY=${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }}" >> .env
-          echo "VITE_GITHUB_CLIENT_ID=${{ secrets.VITE_GITHUB_CLIENT_ID }}" >> .env
           echo "VITE_APP_URL=${{ secrets.VITE_APP_URL }}" >> .env
 
       - name: Build application
         run: pnpm run build
         env:
-          VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
-          VITE_STRIPE_PUBLISHABLE_KEY: ${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }}
-          VITE_GITHUB_CLIENT_ID: ${{ secrets.VITE_GITHUB_CLIENT_ID }}
           VITE_APP_URL: ${{ secrets.VITE_APP_URL }}
 
       - name: Run type check
