@@ -52,7 +52,6 @@ const stackFeatures = [
 const quickLinks = [
 	{ href: '/sign-in', label: 'Sign In' },
 	{ href: '/sign-up', label: 'Sign Up' },
-	{ href: '/demo/tanstack-query', label: 'TanStack Query Demo' },
 ];
 
 export function HomePage() {
@@ -104,12 +103,6 @@ export function HomePage() {
 								Read the docs
 								<ExternalLink className="ml-2 h-4 w-4" />
 							</a>
-						</Button>
-						<Button asChild variant="outline" size="lg">
-							<Link to="/demo/tanstack-query">
-								View the demo
-								<ExternalLink className="ml-2 h-4 w-4" />
-							</Link>
 						</Button>
 					</div>
 				</div>
