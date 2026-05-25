@@ -5,16 +5,16 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path, { resolve } from 'node:path';
 
+import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 import { devtools } from '@tanstack/devtools-vite';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
-import viteReact from '@vitejs/plugin-react';
+import viteReact, { reactCompilerPreset } from '@vitejs/plugin-react';
 import { nitro } from 'nitro/vite';
 import { defineConfig } from 'vite';
 import type { Plugin } from 'vite';
 import { iconsSpritesheet } from 'vite-plugin-icons-spritesheet';
 import svgr from 'vite-plugin-svgr';
-import viteTsConfigPaths from 'vite-tsconfig-paths';
 
 function snakeCase(str: string) {
 	const wordSeparators =
@@ -143,16 +143,12 @@ export default defineConfig({
 				},
 			},
 		}),
-		viteTsConfigPaths({
-			projects: ['./tsconfig.json'],
-		}),
 		tanstackStart(),
 		nitro(),
 		svgr(),
-		viteReact({
-			babel: {
-				plugins: ['babel-plugin-react-compiler'],
-			},
+		viteReact(),
+		babel({
+			presets: [reactCompilerPreset()],
 		}),
 
 		tailwindcss(),
@@ -176,6 +172,7 @@ export default defineConfig({
 		environment: 'jsdom',
 	},
 	resolve: {
+		tsconfigPaths: true,
 		alias: {
 			'@': resolve(__dirname, './src'),
 		},
