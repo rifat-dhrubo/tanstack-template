@@ -34,7 +34,8 @@ A neutral, opinionated starting point for building applications with the TanStac
 - **API Scaffold**: Orval configured to generate typed API clients from your OpenAPI spec.
 - **Modern Styling**: Tailwind CSS v4 and shadcn/ui for accessible, composable components.
 - **Feature-Based Architecture**: Domain-oriented folder structure that scales.
-- **CI/CD Ready**: GitHub Actions for S3/CloudFront deployment and Semantic Release.
+- **Deploy Scaffold**: GitHub Actions build artifact workflow with optional SSH deployment.
+- **Release Ready**: Semantic Release workflow included for automated versioning.
 
 ## Architecture
 
@@ -79,7 +80,7 @@ To wire Orval to your API:
 
 - [ ] Place your OpenAPI spec at the path referenced in `orval.config.mjs`.
 - [ ] Run `pnpm run generate` to produce typed hooks and types.
-- [ ] Update the shared API client configuration in `src/integrations/api/`.
+- [ ] Update the shared API client configuration in `src/services/api-client.ts`.
 - [ ] Commit the generated output.
 
 ### Authentication Scaffold
@@ -110,7 +111,7 @@ Sign-in and sign-up pages use **TanStack Form** with **Zod** validation schemas 
 
 3.  **Set environment variables (if needed):**
 
-    Configure secrets via your CI/CD provider or create a `.env` file. See your deployment workflow for required variables.
+    Create a `.env` file for local application variables such as `VITE_API_BASE_URL`.
 
 ### Running Locally
 
@@ -139,10 +140,25 @@ The app will be available at `http://localhost:3210`.
 
 ## Workflows
 
-This template includes GitHub Actions for common CI/CD tasks. Adapt them to your infrastructure.
+This template includes GitHub Actions for release automation and a configurable deployment scaffold.
 
-- **Deploy**: Builds and deploys the app to AWS S3/CloudFront on push to `main`, `stage`, or `dev`. Requires S3 bucket, CloudFront distribution, and secrets configured in your GitHub repository.
+- **Deploy**: Builds the TanStack Start `.output` directory, uploads it as a workflow artifact, and optionally deploys it to an SSH host.
 - **Release**: Automates versioning and changelog generation using Semantic Release on pushes to `main`.
+
+### Deployment Scaffold
+
+The deploy workflow always verifies the app and uploads `.output` as an artifact. To enable the optional SSH deployment job:
+
+- [ ] Set repository variable `DEPLOY_TARGET=ssh`.
+- [ ] Set repository variable `DEPLOY_PATH` to the target directory on your server.
+- [ ] Optionally set repository variable `DEPLOY_RESTART_COMMAND` to restart your app process after sync.
+- [ ] Optionally set repository variable `VITE_API_BASE_URL` for production builds.
+- [ ] Set repository secret `DEPLOY_SSH_HOST`.
+- [ ] Set repository secret `DEPLOY_SSH_USER`.
+- [ ] Set repository secret `DEPLOY_SSH_KEY` to a private key with write access to `DEPLOY_PATH`.
+- [ ] Optionally set repository secret `DEPLOY_SSH_PORT`; it defaults to `22`.
+
+The scaffold deploys the complete TanStack Start `.output` directory. Configure your server process manager to run the built server entry from that directory according to your hosting setup.
 
 ## Contributing
 
