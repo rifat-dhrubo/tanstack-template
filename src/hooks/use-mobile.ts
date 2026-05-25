@@ -1,3 +1,5 @@
+import React from 'react';
+
 function getInitialIsMobile(): boolean {
 	if (typeof window === 'undefined') return false;
 	return window.matchMedia(`(max-width: ${768 - 1}px)`).matches;
