@@ -19,9 +19,7 @@ function RouteComponent() {
 							<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary">
 								<Zap className="h-5 w-5 text-white" />
 							</div>
-							<span className="font-heading text-xl font-bold">
-								GraphBit Cloud
-							</span>
+							<span className="font-heading text-xl font-bold">App Name</span>
 						</div>
 						<Button asChild variant="ghost">
 							<Link className="flex items-center space-x-2" to="/">
@@ -41,8 +39,7 @@ function RouteComponent() {
 							Start building the future
 						</h2>
 						<p className="mb-8 text-lg text-muted-foreground">
-							Join thousands of developers who trust GraphBit Cloud for their
-							applications.
+							Start building modern, scalable applications with our platform.
 						</p>
 
 						<div className="space-y-6">
@@ -96,11 +93,10 @@ function RouteComponent() {
 					<div className="w-full max-w-md">
 						<div className="mb-8 text-center">
 							<h1 className="font-heading mb-2 text-3xl font-bold text-foreground">
-								Join GraphBit Cloud
+								Create your account
 							</h1>
 							<p className="text-muted-foreground">
-								Create your account and start building amazing GraphBit
-								applications
+								Create your account and start building amazing applications
 							</p>
 						</div>
 
