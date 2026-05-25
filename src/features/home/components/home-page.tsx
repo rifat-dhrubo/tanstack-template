@@ -15,6 +15,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
+import { LocaleSwitcher } from '@/integrations/i18n/locale-switcher';
 
 const stackFeatures = [
 	{
@@ -70,6 +71,7 @@ export function HomePage() {
 							</span>
 						</div>
 						<div className="flex items-center space-x-1">
+							<LocaleSwitcher />
 							{quickLinks.map((link) => (
 								<Button key={link.href} asChild variant="ghost" size="sm">
 									<Link to={link.href}>{link.label}</Link>

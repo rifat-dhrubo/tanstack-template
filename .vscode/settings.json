@@ -40,5 +40,6 @@
 	"workbench.editor.customLabels.enabled": true,
 	"workbench.editor.customLabels.patterns": {
 		"**/routes/**/*.{ts,tsx}": "${dirname}/${filename}.${extname}"
-	}
+	},
+	"js/ts.tsdk.path": "node_modules/typescript/lib"
 }
