@@ -20,16 +20,16 @@ import {
 export function NavMain({
 	items,
 }: {
-	items: Array<{
+	items: {
 		title: string;
 		url: string;
 		icon?: LucideIcon;
 		isActive?: boolean;
-		items?: Array<{
+		items?: {
 			title: string;
 			url: string;
-		}>;
-	}>;
+		}[];
+	}[];
 }) {
 	return (
 		<SidebarGroup>

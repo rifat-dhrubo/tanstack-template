@@ -13,7 +13,7 @@ if (fs.existsSync(gitignorePath)) {
 }
 
 // --- Helper: recursively list files ---
-function getAllFiles(dir: string): Array<string> {
+function getAllFiles(dir: string): string[] {
 	const entries = fs.readdirSync(dir, { withFileTypes: true });
 	return entries.flatMap((entry) => {
 		const res = path.join(dir, entry.name);
@@ -53,7 +53,7 @@ function toKebabCase(name: string) {
 }
 
 // --- Generate install command ---
-function generateInstallCommand(icons: Array<string>) {
+function generateInstallCommand(icons: string[]) {
 	if (icons.length === 0) {
 		console.log('No lucide icons found.');
 		return;

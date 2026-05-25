@@ -3,11 +3,14 @@
 
 import crypto from 'node:crypto';
 import fs from 'node:fs';
-import { resolve } from 'node:path';
+import path, { resolve } from 'node:path';
 
+import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
-import { tanstackRouter } from '@tanstack/router-plugin/vite';
-import viteReact from '@vitejs/plugin-react';
+import { devtools } from '@tanstack/devtools-vite';
+import { tanstackStart } from '@tanstack/react-start/plugin/vite';
+import viteReact, { reactCompilerPreset } from '@vitejs/plugin-react';
+import { nitro } from 'nitro/vite';
 import { defineConfig } from 'vite';
 import type { Plugin } from 'vite';
 import { iconsSpritesheet } from 'vite-plugin-icons-spritesheet';
@@ -71,6 +74,7 @@ function getCachedIconsHash(): string {
 
 const iconsHash = getCachedIconsHash();
 const hashedIconFileName = `icon.${iconsHash}.svg`;
+const isVitest = process.env.VITEST === 'true';
 
 /**
  * Ensures both static and hashed versions of the icon sprite exist
@@ -99,7 +103,7 @@ function replaceIconReferencesPlugin(hashedFile: string): Plugin {
 		name: 'replace-icon-references',
 		apply: 'build',
 		closeBundle() {
-			const distDir = resolve('dist');
+			const distDir = resolve('.output');
 			const replaceInFiles = (dir: string) => {
 				for (const file of fs.readdirSync(dir)) {
 					const filePath = resolve(dir, file);
@@ -126,12 +130,27 @@ function replaceIconReferencesPlugin(hashedFile: string): Plugin {
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
-		tanstackRouter({ autoCodeSplitting: true, target: 'react' }),
+		!isVitest &&
+			devtools({
+				editor: {
+					name: 'code',
+					open: async (filePath, lineNumber, columnNumber) => {
+						const { exec } = await import('node:child_process');
+
+						const location = lineNumber
+							? `${path.normalize(filePath)}:${lineNumber}${columnNumber ? `:${columnNumber}` : ''}`
+							: path.normalize(filePath);
+
+						exec(`code --goto "${location}"`);
+					},
+				},
+			}),
+		!isVitest && tanstackStart(),
+		!isVitest && nitro(),
 		svgr(),
-		viteReact({
-			babel: {
-				plugins: ['babel-plugin-react-compiler'],
-			},
+		viteReact(),
+		babel({
+			presets: [reactCompilerPreset()],
 		}),
 
 		tailwindcss(),
@@ -155,6 +174,7 @@ export default defineConfig({
 		environment: 'jsdom',
 	},
 	resolve: {
+		tsconfigPaths: true,
 		alias: {
 			'@': resolve(__dirname, './src'),
 		},
