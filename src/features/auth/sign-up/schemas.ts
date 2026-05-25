@@ -1,14 +1,18 @@
 import { z } from 'zod';
 
+import * as m from '@/paraglide/messages';
+
 export const signUpSchema = z
 	.object({
-		name: z.string().min(1, 'Name is required'),
-		email: z.string().email('Please enter a valid email address'),
-		password: z.string().min(8, 'Password must be at least 8 characters'),
-		confirmPassword: z.string().min(1, 'Please confirm your password'),
+		name: z.string().min(1, m.validation_name_required()),
+		email: z.string().email(m.validation_invalid_email()),
+		password: z.string().min(8, m.validation_password_min_length()),
+		confirmPassword: z
+			.string()
+			.min(1, m.validation_confirm_password_required()),
 	})
 	.refine((data) => data.password === data.confirmPassword, {
-		message: 'Passwords do not match',
+		message: m.validation_passwords_must_match(),
 		path: ['confirmPassword'],
 	});
 

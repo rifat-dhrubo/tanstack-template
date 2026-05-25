@@ -15,46 +15,46 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
+import * as m from '@/paraglide/messages';
 
-const stackFeatures = [
-	{
-		icon: Router,
-		title: 'TanStack Router',
-		description:
-			'File-based routing with type-safe navigation, search params, and loader data across client and server.',
-	},
-	{
-		icon: Database,
-		title: 'TanStack Query',
-		description:
-			'Server-state management with automatic caching, background refetching, and optimistic updates.',
-	},
-	{
-		icon: Braces,
-		title: 'TypeScript',
-		description:
-			'End-to-end type safety from the database to the view layer with strict configuration.',
-	},
-	{
-		icon: Paintbrush,
-		title: 'shadcn/ui',
-		description:
-			'Accessible, unstyled primitives with a New York style and zinc color palette.',
-	},
-	{
-		icon: Zap,
-		title: 'Tailwind CSS v4',
-		description:
-			'Utility-first styling with CSS variables for seamless light and dark mode theming.',
-	},
-];
+function useStackFeatures() {
+	return [
+		{
+			icon: Router,
+			title: m.home_feature_router_title(),
+			description: m.home_feature_router_description(),
+		},
+		{
+			icon: Database,
+			title: m.home_feature_query_title(),
+			description: m.home_feature_query_description(),
+		},
+		{
+			icon: Braces,
+			title: m.home_feature_typescript_title(),
+			description: m.home_feature_typescript_description(),
+		},
+		{
+			icon: Paintbrush,
+			title: m.home_feature_shadcn_title(),
+			description: m.home_feature_shadcn_description(),
+		},
+		{
+			icon: Zap,
+			title: m.home_feature_tailwind_title(),
+			description: m.home_feature_tailwind_description(),
+		},
+	];
+}
 
 const quickLinks = [
-	{ href: '/sign-in', label: 'Sign In' },
-	{ href: '/sign-up', label: 'Sign Up' },
+	{ href: '/sign-in', label: m.nav_sign_in },
+	{ href: '/sign-up', label: m.nav_sign_up },
 ];
 
 export function HomePage() {
+	const stackFeatures = useStackFeatures();
+
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
 			{/* Navigation */}
@@ -66,13 +66,13 @@ export function HomePage() {
 								<Router className="h-5 w-5 text-primary-foreground" />
 							</div>
 							<span className="font-heading text-xl font-bold">
-								TanStack Template
+								{m.home_nav_title()}
 							</span>
 						</div>
 						<div className="flex items-center space-x-1">
 							{quickLinks.map((link) => (
 								<Button key={link.href} asChild variant="ghost" size="sm">
-									<Link to={link.href}>{link.label}</Link>
+									<Link to={link.href}>{link.label()}</Link>
 								</Button>
 							))}
 						</div>
@@ -84,23 +84,22 @@ export function HomePage() {
 			<section className="mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 sm:pt-24 sm:pb-28 lg:px-8">
 				<div className="mx-auto max-w-3xl text-center">
 					<div className="mb-6 inline-flex items-center rounded-full border border-border/50 bg-muted/50 px-3 py-1 text-sm text-muted-foreground">
-						TanStack Start + React 19
+						{m.home_hero_badge()}
 					</div>
 					<h1 className="font-heading mb-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-						Build modern web apps
+						{m.home_hero_title_1()}
 						<br />
 						<span className="text-muted-foreground">
-							with the full TanStack
+							{m.home_hero_title_2()}
 						</span>
 					</h1>
 					<p className="mb-8 text-lg text-muted-foreground sm:text-xl">
-						A production-ready template combining TanStack Router, Query, and
-						Start with shadcn/ui, Tailwind CSS v4, and TypeScript.
+						{m.home_hero_description()}
 					</p>
 					<div className="flex flex-wrap items-center justify-center gap-3">
 						<Button asChild size="lg">
 							<a href="https://tanstack.com" target="_blank" rel="noreferrer">
-								Read the docs
+								{m.home_docs_link()}
 								<ExternalLink className="ml-2 h-4 w-4" />
 							</a>
 						</Button>
@@ -113,11 +112,10 @@ export function HomePage() {
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					<div className="mx-auto mb-12 max-w-2xl text-center">
 						<h2 className="font-heading mb-3 text-3xl font-bold sm:text-4xl">
-							What&apos;s included
+							{m.home_features_title()}
 						</h2>
 						<p className="text-muted-foreground">
-							Everything you need to start building a production-grade
-							application.
+							{m.home_features_description()}
 						</p>
 					</div>
 					<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -143,10 +141,10 @@ export function HomePage() {
 			<section className="mx-auto max-w-7xl px-4 pt-16 pb-20 sm:px-6 sm:pt-24 sm:pb-28 lg:px-8">
 				<div className="mx-auto max-w-2xl text-center">
 					<h2 className="font-heading mb-3 text-3xl font-bold sm:text-4xl">
-						Getting started
+						{m.home_getting_started_title()}
 					</h2>
 					<p className="mb-8 text-muted-foreground">
-						Clone the template and start building.
+						{m.home_getting_started_description()}
 					</p>
 					<div className="rounded-lg border border-border/50 bg-muted/30 p-4 text-left">
 						<code className="block text-sm">
@@ -162,14 +160,14 @@ export function HomePage() {
 				<div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 					<div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
 						<p className="text-sm text-muted-foreground">
-							Built with the TanStack ecosystem.
+							{m.home_footer_text({ ecosystem: 'TanStack ecosystem' })}
 						</p>
 						<div className="flex items-center space-x-4">
 							<Button asChild variant="link" size="sm">
-								<Link to="/sign-in">Sign In</Link>
+								<Link to="/sign-in">{m.nav_sign_in()}</Link>
 							</Button>
 							<Button asChild variant="link" size="sm">
-								<Link to="/sign-up">Sign Up</Link>
+								<Link to="/sign-up">{m.nav_sign_up()}</Link>
 							</Button>
 						</div>
 					</div>
