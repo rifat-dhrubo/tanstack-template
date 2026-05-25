@@ -10,6 +10,7 @@ import {
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 
 import { queryDevtools as TanStackQueryDevtools } from '../integrations/tanstack-query/devtools';
+import { getLocale } from '../paraglide/runtime.js';
 import appCss from '../styles.css?url';
 
 import { ThemeProvider } from '@/integrations/theme-provider';
@@ -42,7 +43,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html suppressHydrationWarning lang="en">
+		<html suppressHydrationWarning lang={getLocale()}>
 			<head>
 				<HeadContent />
 			</head>

@@ -126,6 +126,7 @@ export default tseslint.config(
 			'**/orval.config.ts',
 			'**/commitlint.config.ts',
 			'**/prettier.config.mjs',
+			'**/server.ts',
 		],
 		rules: { 'import/no-default-export': 'off' },
 	},
