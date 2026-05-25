@@ -1,5 +1,6 @@
 import { signInSchema } from '@/features/auth/sign-in/schemas';
 import { signUpSchema } from '@/features/auth/sign-up/schemas';
+import * as m from '@/paraglide/messages';
 
 describe('signInSchema', () => {
 	it('rejects empty email', () => {
@@ -7,7 +8,7 @@ describe('signInSchema', () => {
 		expect(result.success).toBe(false);
 		if (!result.success) {
 			expect(result.error.issues[0]?.message).toBe(
-				'Please enter a valid email address',
+				m.validation_invalid_email(),
 			);
 		}
 	});
@@ -20,7 +21,7 @@ describe('signInSchema', () => {
 		expect(result.success).toBe(false);
 		if (!result.success) {
 			expect(result.error.issues[0]?.message).toBe(
-				'Please enter a valid email address',
+				m.validation_invalid_email(),
 			);
 		}
 	});
@@ -32,7 +33,9 @@ describe('signInSchema', () => {
 		});
 		expect(result.success).toBe(false);
 		if (!result.success) {
-			expect(result.error.issues[0]?.message).toBe('Password is required');
+			expect(result.error.issues[0]?.message).toBe(
+				m.validation_password_required(),
+			);
 		}
 	});
 
@@ -62,7 +65,7 @@ describe('signUpSchema', () => {
 		expect(result.success).toBe(false);
 		if (!result.success) {
 			expect(result.error.issues[0]?.message).toBe(
-				'Password must be at least 8 characters',
+				m.validation_password_min_length(),
 			);
 		}
 	});
@@ -76,7 +79,9 @@ describe('signUpSchema', () => {
 		});
 		expect(result.success).toBe(false);
 		if (!result.success) {
-			expect(result.error.issues[0]?.message).toBe('Passwords do not match');
+			expect(result.error.issues[0]?.message).toBe(
+				m.validation_passwords_must_match(),
+			);
 		}
 	});
 
@@ -89,7 +94,9 @@ describe('signUpSchema', () => {
 		});
 		expect(result.success).toBe(false);
 		if (!result.success) {
-			expect(result.error.issues[0]?.message).toBe('Name is required');
+			expect(result.error.issues[0]?.message).toBe(
+				m.validation_name_required(),
+			);
 		}
 	});
 
