@@ -1,12 +1,12 @@
 import { defineConfig } from 'orval';
 
 export default defineConfig({
-	graphbit: {
-		input: 'https://petstore.swagger.io/v2/swagger.json',
+	api: {
+		input: './openapi.yaml',
 		output: {
 			client: 'react-query',
 			mode: 'single',
-			target: './src/generated/graphbit.ts',
+			target: './src/generated/api.ts',
 			httpClient: 'axios',
 			override: {
 				query: {
