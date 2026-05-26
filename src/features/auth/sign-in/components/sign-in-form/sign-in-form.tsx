@@ -2,7 +2,7 @@ import { useForm } from '@tanstack/react-form';
 import { Link } from '@tanstack/react-router';
 import { LoaderCircle } from 'lucide-react';
 import React from 'react';
-import { z } from 'zod';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/card';
 import {
 	Field,
+	FieldContent,
 	FieldError,
 	FieldGroup,
 	FieldLabel,
@@ -35,12 +36,22 @@ function SignInForm() {
 		},
 		onSubmit: async (data) => {
 			setIsSubmitting(true);
-			try {
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-				console.log('Sign in:', data.value);
-			} finally {
-				setIsSubmitting(false);
-			}
+			const signIn = new Promise<void>((resolve) => {
+				setTimeout(resolve, 1000);
+			})
+				.then(() => {
+					console.log('Sign in:', data.value);
+				})
+				.finally(() => {
+					setIsSubmitting(false);
+				});
+
+			const signInToast = toast.promise(signIn, {
+				loading: m.auth_sign_in_toast_loading(),
+				success: m.auth_sign_in_toast_success(),
+				error: m.auth_sign_in_toast_error(),
+			});
+			await signInToast.unwrap();
 		},
 	});
 
@@ -60,16 +71,12 @@ function SignInForm() {
 						}}
 					>
 						<FieldGroup>
-							<form.Field
-								name="email"
-								validators={{
-									onChange: z.string().email(m.validation_invalid_email()),
-								}}
-							>
+							<form.Field name="email">
 								{(field) => {
-									const errors = field.state.meta.errors;
+									const isInvalid =
+										field.state.meta.isTouched && !field.state.meta.isValid;
 									return (
-										<Field data-invalid={errors.length > 0}>
+										<Field data-invalid={isInvalid}>
 											<FieldLabel htmlFor={field.name}>
 												{m.auth_email_label()}
 											</FieldLabel>
@@ -81,39 +88,33 @@ function SignInForm() {
 												value={field.state.value}
 												onChange={(e) => field.handleChange(e.target.value)}
 												onBlur={field.handleBlur}
-												aria-invalid={errors.length > 0}
+												aria-invalid={isInvalid}
 												required
 											/>
-											<FieldError
-												errors={errors.map((e) => ({
-													message: e?.message ?? '',
-												}))}
-											/>
+											{isInvalid ? (
+												<FieldError errors={field.state.meta.errors} />
+											) : null}
 										</Field>
 									);
 								}}
 							</form.Field>
-							<form.Field
-								name="password"
-								validators={{
-									onChange: z.string().min(1, m.validation_password_required()),
-								}}
-							>
+							<form.Field name="password">
 								{(field) => {
-									const errors = field.state.meta.errors;
+									const isInvalid =
+										field.state.meta.isTouched && !field.state.meta.isValid;
 									return (
-										<Field data-invalid={errors.length > 0}>
-											<div className="flex items-center">
+										<Field data-invalid={isInvalid}>
+											<FieldContent className="flex-row items-center justify-between">
 												<FieldLabel htmlFor={field.name}>
 													{m.auth_password_label()}
 												</FieldLabel>
 												<button
 													type="button"
-													className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+													className="text-sm underline-offset-4 hover:underline"
 												>
 													{m.auth_forgot_password()}
 												</button>
-											</div>
+											</FieldContent>
 											<Input
 												id={field.name}
 												name={field.name}
@@ -121,14 +122,12 @@ function SignInForm() {
 												value={field.state.value}
 												onChange={(e) => field.handleChange(e.target.value)}
 												onBlur={field.handleBlur}
-												aria-invalid={errors.length > 0}
+												aria-invalid={isInvalid}
 												required
 											/>
-											<FieldError
-												errors={errors.map((e) => ({
-													message: e?.message ?? '',
-												}))}
-											/>
+											{isInvalid ? (
+												<FieldError errors={field.state.meta.errors} />
+											) : null}
 										</Field>
 									);
 								}}
