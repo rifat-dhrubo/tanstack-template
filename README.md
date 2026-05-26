@@ -87,6 +87,18 @@ To wire Orval to your API:
 
 Sign-in and sign-up pages use **TanStack Form** with **Zod** validation schemas and shadcn/ui form components. This is a neutral scaffold — no authentication provider is pre-configured. Wire this to your own auth backend or swap in Clerk, Supabase Auth, Auth0, etc.
 
+### Internationalization Scaffold
+
+Paraglide is configured with `en` as the source locale and `de` as a second example locale. Durable messages live in `messages/en.json` and `messages/de.json`; generated runtime files are written to `src/paraglide/` and are ignored by Git.
+
+To add or update localized copy:
+
+- Edit the message source files in `messages/`.
+- Add new locale tags to `project.inlang/settings.json`.
+- Use generated message functions from `@/paraglide/messages` in UI and validation code.
+- Verify localized routes such as `/en`, `/de`, `/en/sign-in`, and `/de/sign-in`.
+- Run `pnpm run type:check`, `pnpm test`, and `pnpm run build` after locale or message changes.
+
 ## Getting Started
 
 ### Prerequisites
@@ -123,20 +135,20 @@ The app will be available at `http://localhost:3210`.
 
 ## Available Scripts
 
-| Script                     | Description                                   |
-| -------------------------- | --------------------------------------------- |
-| `pnpm run dev`             | Start the development server                  |
-| `pnpm run build`           | Build for production + type check             |
-| `pnpm run serve`           | Preview the production build                  |
-| `pnpm test`                | Run tests with Vitest                         |
-| `pnpm run lint`            | Lint code with ESLint                         |
-| `pnpm run lint:fix`        | Fix lint and format issues                    |
-| `pnpm run format`          | Format code with Prettier                     |
-| `pnpm run type:check`      | Type-check the project with TypeScript        |
-| `pnpm run check`           | Format and lint all files                     |
-| `pnpm run generate`        | Generate API client from OpenAPI spec         |
-| `pnpm run lucide:generate` | Optimize and install used Lucide icons        |
-| `pnpm run commit`          | Commit changes using Commitizen               |
+| Script                     | Description                            |
+| -------------------------- | -------------------------------------- |
+| `pnpm run dev`             | Start the development server           |
+| `pnpm run build`           | Build for production + type check      |
+| `pnpm run serve`           | Preview the production build           |
+| `pnpm test`                | Run tests with Vitest                  |
+| `pnpm run lint`            | Lint code with ESLint                  |
+| `pnpm run lint:fix`        | Fix lint and format issues             |
+| `pnpm run format`          | Format code with Prettier              |
+| `pnpm run type:check`      | Type-check the project with TypeScript |
+| `pnpm run check`           | Format and lint all files              |
+| `pnpm run generate`        | Generate API client from OpenAPI spec  |
+| `pnpm run lucide:generate` | Optimize and install used Lucide icons |
+| `pnpm run commit`          | Commit changes using Commitizen        |
 
 ## Workflows
 
