@@ -5,6 +5,7 @@ import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query
 
 import './styles.css';
 import * as TanStackQueryProvider from './integrations/tanstack-query/root-provider.tsx';
+import { deLocalizeUrl, localizeUrl } from './paraglide/runtime.js';
 import { routeTree } from './routeTree.gen.ts';
 
 // Create a new router instance
@@ -18,6 +19,10 @@ export const getRouter = () => {
 		context: { ...rqContext },
 		defaultPreload: 'intent',
 		defaultViewTransition: true,
+		rewrite: {
+			input: ({ url }) => deLocalizeUrl(url),
+			output: ({ url }) => localizeUrl(url),
+		},
 		Wrap: (props: { children: React.ReactNode }) => {
 			return (
 				<TanStackQueryProvider.Provider {...rqContext}>

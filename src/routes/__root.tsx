@@ -13,6 +13,7 @@ import { queryDevtools as TanStackQueryDevtools } from '../integrations/tanstack
 import appCss from '../styles.css?url';
 
 import { ThemeProvider } from '@/integrations/theme-provider';
+import { getLocale } from '@/paraglide/runtime';
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -41,8 +42,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+	const locale = getLocale();
+
 	return (
-		<html suppressHydrationWarning lang="en">
+		<html suppressHydrationWarning lang={locale}>
 			<head>
 				<HeadContent />
 			</head>
