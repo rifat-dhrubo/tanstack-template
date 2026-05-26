@@ -2,7 +2,7 @@ import { useForm } from '@tanstack/react-form';
 import { Link } from '@tanstack/react-router';
 import { LoaderCircle } from 'lucide-react';
 import React from 'react';
-import { z } from 'zod';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -37,12 +37,22 @@ function SignUpForm() {
 		},
 		onSubmit: async (data) => {
 			setIsSubmitting(true);
-			try {
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-				console.log('Sign up:', data.value);
-			} finally {
-				setIsSubmitting(false);
-			}
+			const signUp = new Promise<void>((resolve) => {
+				setTimeout(resolve, 1000);
+			})
+				.then(() => {
+					console.log('Sign up:', data.value);
+				})
+				.finally(() => {
+					setIsSubmitting(false);
+				});
+
+			const signUpToast = toast.promise(signUp, {
+				loading: m.auth_sign_up_toast_loading(),
+				success: m.auth_sign_up_toast_success(),
+				error: m.auth_sign_up_toast_error(),
+			});
+			await signUpToast.unwrap();
 		},
 	});
 
@@ -62,16 +72,12 @@ function SignUpForm() {
 						}}
 					>
 						<FieldGroup>
-							<form.Field
-								name="name"
-								validators={{
-									onChange: z.string().min(1, m.validation_name_required()),
-								}}
-							>
+							<form.Field name="name">
 								{(field) => {
-									const errors = field.state.meta.errors;
+									const isInvalid =
+										field.state.meta.isTouched && !field.state.meta.isValid;
 									return (
-										<Field data-invalid={errors.length > 0}>
+										<Field data-invalid={isInvalid}>
 											<FieldLabel htmlFor={field.name}>
 												{m.auth_name_label()}
 											</FieldLabel>
@@ -83,28 +89,22 @@ function SignUpForm() {
 												value={field.state.value}
 												onChange={(e) => field.handleChange(e.target.value)}
 												onBlur={field.handleBlur}
-												aria-invalid={errors.length > 0}
+												aria-invalid={isInvalid}
 												required
 											/>
-											<FieldError
-												errors={errors.map((e) => ({
-													message: e?.message ?? '',
-												}))}
-											/>
+											{isInvalid ? (
+												<FieldError errors={field.state.meta.errors} />
+											) : null}
 										</Field>
 									);
 								}}
 							</form.Field>
-							<form.Field
-								name="email"
-								validators={{
-									onChange: z.string().email(m.validation_invalid_email()),
-								}}
-							>
+							<form.Field name="email">
 								{(field) => {
-									const errors = field.state.meta.errors;
+									const isInvalid =
+										field.state.meta.isTouched && !field.state.meta.isValid;
 									return (
-										<Field data-invalid={errors.length > 0}>
+										<Field data-invalid={isInvalid}>
 											<FieldLabel htmlFor={field.name}>
 												{m.auth_email_label()}
 											</FieldLabel>
@@ -116,30 +116,22 @@ function SignUpForm() {
 												value={field.state.value}
 												onChange={(e) => field.handleChange(e.target.value)}
 												onBlur={field.handleBlur}
-												aria-invalid={errors.length > 0}
+												aria-invalid={isInvalid}
 												required
 											/>
-											<FieldError
-												errors={errors.map((e) => ({
-													message: e?.message ?? '',
-												}))}
-											/>
+											{isInvalid ? (
+												<FieldError errors={field.state.meta.errors} />
+											) : null}
 										</Field>
 									);
 								}}
 							</form.Field>
-							<form.Field
-								name="password"
-								validators={{
-									onChange: z
-										.string()
-										.min(8, m.validation_password_min_length()),
-								}}
-							>
+							<form.Field name="password">
 								{(field) => {
-									const errors = field.state.meta.errors;
+									const isInvalid =
+										field.state.meta.isTouched && !field.state.meta.isValid;
 									return (
-										<Field data-invalid={errors.length > 0}>
+										<Field data-invalid={isInvalid}>
 											<FieldLabel htmlFor={field.name}>
 												{m.auth_password_label()}
 											</FieldLabel>
@@ -150,30 +142,22 @@ function SignUpForm() {
 												value={field.state.value}
 												onChange={(e) => field.handleChange(e.target.value)}
 												onBlur={field.handleBlur}
-												aria-invalid={errors.length > 0}
+												aria-invalid={isInvalid}
 												required
 											/>
-											<FieldError
-												errors={errors.map((e) => ({
-													message: e?.message ?? '',
-												}))}
-											/>
+											{isInvalid ? (
+												<FieldError errors={field.state.meta.errors} />
+											) : null}
 										</Field>
 									);
 								}}
 							</form.Field>
-							<form.Field
-								name="confirmPassword"
-								validators={{
-									onChange: z
-										.string()
-										.min(1, m.validation_confirm_password_required()),
-								}}
-							>
+							<form.Field name="confirmPassword">
 								{(field) => {
-									const errors = field.state.meta.errors;
+									const isInvalid =
+										field.state.meta.isTouched && !field.state.meta.isValid;
 									return (
-										<Field data-invalid={errors.length > 0}>
+										<Field data-invalid={isInvalid}>
 											<FieldLabel htmlFor={field.name}>
 												{m.auth_confirm_password_label()}
 											</FieldLabel>
@@ -184,14 +168,12 @@ function SignUpForm() {
 												value={field.state.value}
 												onChange={(e) => field.handleChange(e.target.value)}
 												onBlur={field.handleBlur}
-												aria-invalid={errors.length > 0}
+												aria-invalid={isInvalid}
 												required
 											/>
-											<FieldError
-												errors={errors.map((e) => ({
-													message: e?.message ?? '',
-												}))}
-											/>
+											{isInvalid ? (
+												<FieldError errors={field.state.meta.errors} />
+											) : null}
 										</Field>
 									);
 								}}

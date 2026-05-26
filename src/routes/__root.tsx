@@ -12,6 +12,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { queryDevtools as TanStackQueryDevtools } from '../integrations/tanstack-query/devtools';
 import appCss from '../styles.css?url';
 
+import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/integrations/theme-provider';
 import { getLocale } from '@/paraglide/runtime';
 
@@ -52,6 +53,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body>
 				<ThemeProvider forcedTheme="light">
 					{children}
+					<Toaster />
 					<TanStackDevtools
 						config={{
 							position: 'bottom-right',
