@@ -22,9 +22,9 @@ vi.mock('@/paraglide/messages', () => ({
 		(
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			_params: Record<string, never> = {},
-			options: { languageTag?: string } = {},
+			options: { locale?: string } = {},
 		) => {
-			const tag = options.languageTag ?? mockLocale;
+			const tag = options.locale ?? mockLocale;
 			return tag === 'en' ? 'English' : 'Deutsch';
 		},
 	),

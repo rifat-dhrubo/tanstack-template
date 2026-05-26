@@ -10,7 +10,7 @@
 		"lint": "eslint",
 		"lint:fix": "eslint --fix --cache && prettier --write .",
 		"format": "prettier",
-		"paraglide:compile": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide --strategy url cookie preferredLanguage baseLocale --silent",
+		"paraglide:compile": "node scripts/compile-paraglide.mjs",
 		"type:check": "pnpm paraglide:compile && tsc --noEmit",
 		"check": "prettier --write . && eslint --fix",
 		"prepare": "husky",

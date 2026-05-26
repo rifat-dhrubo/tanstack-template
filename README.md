@@ -180,20 +180,20 @@ The app will be available at `http://localhost:3210`.
 
 ## Available Scripts
 
-| Script                     | Description                                   |
-| -------------------------- | --------------------------------------------- |
-| `pnpm run dev`             | Start the development server                  |
-| `pnpm run build`           | Build for production + type check             |
-| `pnpm run serve`           | Preview the production build                  |
-| `pnpm test`                | Run tests with Vitest                         |
-| `pnpm run lint`            | Lint code with ESLint                         |
-| `pnpm run lint:fix`        | Fix lint and format issues                    |
-| `pnpm run format`          | Format code with Prettier                     |
-| `pnpm run type:check`      | Type-check the project with TypeScript        |
-| `pnpm run check`           | Format and lint all files                     |
-| `pnpm run generate`        | Generate API client from OpenAPI spec         |
-| `pnpm run lucide:generate` | Optimize and install used Lucide icons        |
-| `pnpm run commit`          | Commit changes using Commitizen               |
+| Script                     | Description                            |
+| -------------------------- | -------------------------------------- |
+| `pnpm run dev`             | Start the development server           |
+| `pnpm run build`           | Build for production + type check      |
+| `pnpm run serve`           | Preview the production build           |
+| `pnpm test`                | Run tests with Vitest                  |
+| `pnpm run lint`            | Lint code with ESLint                  |
+| `pnpm run lint:fix`        | Fix lint and format issues             |
+| `pnpm run format`          | Format code with Prettier              |
+| `pnpm run type:check`      | Type-check the project with TypeScript |
+| `pnpm run check`           | Format and lint all files              |
+| `pnpm run generate`        | Generate API client from OpenAPI spec  |
+| `pnpm run lucide:generate` | Optimize and install used Lucide icons |
+| `pnpm run commit`          | Commit changes using Commitizen        |
 
 ## Workflows
 
