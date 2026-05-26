@@ -30,6 +30,7 @@ A neutral, opinionated starting point for building applications with the TanStac
 - **Type-Safe Routing**: File-based routing with full type safety via TanStack Router.
 - **Data Fetching**: Server state management with TanStack Query.
 - **Form Validation**: TanStack Form + Zod for type-safe, validated forms.
+- **Internationalization (i18n)**: Paraglide JS for compile-time message translation with `en`/`de` locale scaffold and localized URL patterns.
 - **Auth Scaffold**: Sign-in / sign-up pages using TanStack Form + Zod with shadcn/ui blocks — ready to wire to any backend.
 - **API Scaffold**: Orval configured to generate typed API clients from your OpenAPI spec.
 - **Modern Styling**: Tailwind CSS v4 and shadcn/ui for accessible, composable components.
@@ -89,15 +90,59 @@ Sign-in and sign-up pages use **TanStack Form** with **Zod** validation schemas 
 
 ### Internationalization Scaffold
 
-Paraglide is configured with `en` as the source locale and `de` as a second example locale. Durable messages live in `messages/en.json` and `messages/de.json`; generated runtime files are written to `src/paraglide/` and are ignored by Git.
+The template uses **Paraglide JS** (`@inlang/paraglide-js`) for internationalization — a lightweight, compile-time i18n runtime that generates tree-shakeable message functions. Paraglide is the only i18n library in the template; no react-i18next, react-intl, or other runtime alternatives are included.
 
-To add or update localized copy:
+#### Default Locales
 
-- Edit the message source files in `messages/`.
-- Add new locale tags to `project.inlang/settings.json`.
-- Use generated message functions from `@/paraglide/messages` in UI and validation code.
-- Verify localized routes such as `/en`, `/de`, `/en/sign-in`, and `/de/sign-in`.
-- Run `pnpm run type:check`, `pnpm test`, and `pnpm run build` after locale or message changes.
+Two locales are pre-configured with `en` as the source language:
+
+| Locale | Code | Message File |
+|--------|------|--------------|
+| English | `en` | `messages/en.json` |
+| German | `de` | `messages/de.json` |
+
+To add a new locale:
+
+- [ ] Add the language tag to `languageTags` in `project.inlang/settings.json`.
+- [ ] Create `messages/{languageTag}.json` with a `$locale` display name and the required message keys.
+- [ ] Translate each key from `messages/en.json`.
+- [ ] Verify with `pnpm run build` (Paraglide validates messages at build time).
+
+Durable message files live at the repository root under `messages/`. The `project.inlang/settings.json` defines the path pattern as `./messages/{languageTag}.json`.
+
+#### Using Messages in UI Code
+
+Paraglide generates typed message functions at build time. Import them from the generated output:
+
+```tsx
+import * as m from '@/paraglide/messages';
+
+function Welcome() {
+  return <h1>{m.welcome()}</h1>;
+}
+```
+
+Message keys in `messages/*.json` become functions on the `m` import. The active locale is determined by the Paraglide runtime — no manual locale passing is needed.
+
+> **Note:** `@/paraglide` points to `src/paraglide/`, a generated directory produced by the Vite plugin at `vite.config.ts:134`. This directory is listed in `.gitignore` and excluded from ESLint — only the durable message files in `messages/` and the Inlang project config in `project.inlang/` are committed to version control.
+
+#### Localized URLs
+
+Routes follow a locale-prefixed pattern: the locale is embedded in the URL path so that links remain shareable and the selected locale survives page reloads.
+
+| Internal Route | English URL | German URL |
+|----------------|-------------|------------|
+| `/` | `/en` | `/de` |
+| `/sign-in` | `/en/sign-in` | `/de/sign-in` |
+| `/sign-up` | `/en/sign-up` | `/de/sign-up` |
+
+The Paraglide runtime rewrites URLs on input (delocalizing `/en/sign-in` → `/sign-in` for the router) and on output (localizing internal paths to the active locale). The root document's `lang` attribute is set from the active locale for accessibility and translation tooling.
+
+#### Verification
+
+- `pnpm run build` — validates Paraglide messages and produces the generated runtime.
+- `pnpm test` — exercises routing tests for locale extraction, URL localization, and message key coverage.
+- `pnpm run dev` and navigate to `/en`, `/de`, `/en/sign-in`, `/de/sign-in` to verify localized rendering.
 
 ## Getting Started
 
